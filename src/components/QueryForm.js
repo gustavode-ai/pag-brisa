@@ -3,6 +3,7 @@ import axios from "axios";
 import { saveAs } from "file-saver";
 import "./QueryForm.css";
 import Papa from "papaparse";
+import { format } from "date-fns";
 
 const QueryForm = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const QueryForm = () => {
     numero: "",
     dataInicio: "",
     dataFim: "",
-    tabela: "simples", // Estado para alternar entre simples e completa
+    tabela: "simples", 
   });
 
   const [error, setError] = useState("");
@@ -70,28 +71,39 @@ const QueryForm = () => {
   };
 
   const exportToCSV = (data) => {
-    
     const now = new Date();
-    const dateStr = now.toISOString().slice(0, 19).replace("T", "_").replace(/:/g, "-"); 
-    const csv = Papa.unparse(data)
+    
+    // Obtendo a data e hora local
+    const dateStr = now.toLocaleString("pt-BR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    }).replace(/[\s/:]/g, "-"); 
+  
+    const formattedData = data.map((row) => {
+      const formattedRow = {};
+      Object.keys(row).forEach((key) => {
+        formattedRow[key] = row[key] || "-";
+      });
+      return formattedRow;
+    });
+  
+    const csv = Papa.unparse(formattedData);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
     saveAs(blob, "resultado_" + dateStr + ".csv");
   };
+  
 
   const handleClear = () => {
     setFormData({
-      tipoDado: "cdrs_sms",
-      tipoNumero: "numeroOrigem",
-      numero: "",
-      dataInicio: "",
-      dataFim: "",
-      tabela: "simples", // Reseta a opção de tabela
-    });
+      tipoDado: "cdrs_sms", tipoNumero: "numeroOrigem", numero: "", dataInicio: "", dataFim: "", tabela: "simples"});
     setError("");
     setResult(null);
   };
 
-  
   let colunasExibidas = [];
   if (formData.tipoDado === "cdrs_sms") {
     colunasExibidas = formData.tabela === "simples"
@@ -103,18 +115,23 @@ const QueryForm = () => {
       : ["id", "dataChamada", "dataImportacao", "duracaoChamada", "duracaoSegundos", "numeroOrigem", "numeroDestino", "numeroDestinoDiscado", "statusChamada", "formatoEntrega", "numeroTratadoVss", "classificacao", "origem", "destino", "cic", "rel", "operadoraItx", "rotaChamada", "operadoraNumero", "rotaVsi", "modalidade", "sentidoChamada", "eotOrigem", "eotDestino", "nomeArquivo"];
   }
 
-  
   const filteredResult = result
     ? result.map((row) => {
         const filteredRow = {};
         colunasExibidas.forEach((col) => {
           if (row[col]) {
             filteredRow[col] = row[col];
+          } else {
+            filteredRow[col] = "    -   "; 
           }
         });
         return filteredRow;
       })
     : [];
+
+  
+  const dataColumns = [
+    "dataChamada", "dataImportacao", "duracaoChamada", "horarioRegistro" ];
 
   return (
     <div>
@@ -141,7 +158,7 @@ const QueryForm = () => {
         <label>
           Número do Cliente:
           <input
-            type="text" name="numero" value={formData.numero} onChange={handleChange} placeholder="Digite o número"required/>
+            type="text" name="numero" value={formData.numero} onChange={handleChange} placeholder="Digite o número" required/>
         </label>
 
         <label>
@@ -164,7 +181,6 @@ const QueryForm = () => {
           <div>
             <input
               type="radio" id="completa" name="tabela" value="completa" checked={formData.tabela === "completa"} onChange={handleChange} />
-              
             <label htmlFor="completa">Tabela Completa</label>
           </div>
         </div>
@@ -188,7 +204,6 @@ const QueryForm = () => {
       {filteredResult && filteredResult.length > 0 ? (
         <div>
           <h2>Resultado</h2>
-          
           <table>
             <thead>
               <tr>
@@ -198,18 +213,20 @@ const QueryForm = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredResult.map((row, index) => (
-                <tr key={index}>
-                  {Object.values(row).map((value, idx) => (
-                    <td key={idx}>{value}</td>
-                  ))}
-                </tr>
-              ))}
+                {filteredResult.map((row, index) => (
+                  <tr key={index}>
+                    {Object.entries(row).map(([key, value], idx) => (
+                      <td key={idx}>
+                        {dataColumns.includes(key) && value && !isNaN(Date.parse(value))
+                          ? format(new Date(value), 'dd-MM-yyyy HH:mm')
+                          : value || "-"}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
-      ) : result && result.length === 0 ? (
-        <center><p className="s">Nenhum resultado encontrado.</p></center>
       ) : null}
     </div>
   );
