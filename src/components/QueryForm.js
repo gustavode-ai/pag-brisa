@@ -7,13 +7,7 @@ import { format } from "date-fns";
 
 const QueryForm = () => {
   const [formData, setFormData] = useState({
-    tipoDado: "cdrs_sms",
-    tipoNumero: "numeroOrigem",
-    numero: "",
-    dataInicio: "",
-    dataFim: "",
-    tabela: "simples", 
-  });
+    tipoDado: "cdrs_sms", tipoNumero: "numeroOrigem", numero: "", dataInicio: "", dataFim: "", tabela: "simples", });
 
   const [error, setError] = useState("");
   const [result, setResult] = useState(null);
@@ -108,7 +102,7 @@ const QueryForm = () => {
   if (formData.tipoDado === "cdrs_sms") {
     colunasExibidas = formData.tabela === "simples"
       ? ["horarioRegistro", "operadoraDeOrigem", "numeroOrigem", "numeroDestino", "tipoDeDestino", "operadoraDeDestino", "resultadoDoEnvio"]
-      : ["opr", "id", "sequencialCdr", "horarioRegistro", "horarioRecepcao", "horarioProcessamento", "tipoDeOrigem", "operadoraDeOrigem", "hostDeOrigemForm", "tipoNumeroOrigem", "planoNumeracaoOrigem", "numeroOrigem", "numeroDestino", "tipoDeDestino", "hostDeDestinoForm", "operadoraDeDestino", "resultadoDoEnvio", "indicadorDeRetentativa", "nomeArquivo"];
+      : ["id", "sequencialCdr", "horarioRegistro", "horarioRecepcao", "horarioProcessamento", "tipoDeOrigem", "operadoraDeOrigem", "hostDeOrigemForm", "tipoNumeroOrigem", "planoNumeracaoOrigem", "numeroOrigem", "numeroDestino", "tipoDeDestino", "hostDeDestinoForm", "operadoraDeDestino", "resultadoDoEnvio", "indicadorDeRetentativa", "nomeArquivo"];
   } else if (formData.tipoDado === "cdrs_chamadas") {
     colunasExibidas = formData.tabela === "simples"
       ? ["dataChamada", "numeroOrigem", "numeroDestino"]
@@ -130,8 +124,7 @@ const QueryForm = () => {
     : [];
 
   
-  const dataColumns = [
-    "dataChamada", "dataImportacao", "duracaoChamada", "horarioRegistro" ];
+  const dataColumns = ["dataChamada", "dataImportacao", "duracaoChamada", "horarioRegistro", "horarioRecepcao", "horarioProcessamento"];
 
   return (
     <div>
@@ -203,30 +196,31 @@ const QueryForm = () => {
 
       {filteredResult && filteredResult.length > 0 ? (
         <div>
-          <h2>Resultado</h2>
-          <table>
-            <thead>
-              <tr>
-                {Object.keys(filteredResult[0]).map((key) => (
-                  <th key={key}>{key}</th>
+        <h2>Resultado</h2>
+        <table className="table">
+          <thead>
+            <tr>
+              {Object.keys(filteredResult[0]).map((key) => (
+                <th key={key}>{key}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {filteredResult.map((row, index) => (
+              <tr key={index}>
+                {Object.entries(row).map(([key, value], idx) => (
+                  <td key={idx}>
+                    {dataColumns.includes(key) && value && !isNaN(Date.parse(value))
+                      ? format(new Date(value), "dd-MM-yyyy HH:mm")
+                      : value || "-"}
+                  </td>
                 ))}
               </tr>
-            </thead>
-            <tbody>
-                {filteredResult.map((row, index) => (
-                  <tr key={index}>
-                    {Object.entries(row).map(([key, value], idx) => (
-                      <td key={idx}>
-                        {dataColumns.includes(key) && value && !isNaN(Date.parse(value))
-                          ? format(new Date(value), 'dd-MM-yyyy HH:mm')
-                          : value || "-"}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       ) : null}
     </div>
   );
