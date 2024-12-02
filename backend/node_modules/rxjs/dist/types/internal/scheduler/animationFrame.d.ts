@@ -1,4 +1,4 @@
-import { AnimationFrameScheduler } from './AnimationFrameScheduler';
+import { AnimationFrameScheduler } from '../../../../src/internal/scheduler/AnimationFrameScheduler';
 /**
  *
  * Animation Frame Scheduler

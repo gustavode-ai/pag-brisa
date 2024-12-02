@@ -103,7 +103,8 @@ const QueryForm = () => {
     colunasExibidas = formData.tabela === "simples"
       ? ["horarioRegistro", "operadoraDeOrigem", "numeroOrigem", "numeroDestino", "tipoDeDestino", "operadoraDeDestino", "resultadoDoEnvio"]
       : ["id", "sequencialCdr", "horarioRegistro", "horarioRecepcao", "horarioProcessamento", "tipoDeOrigem", "operadoraDeOrigem", "hostDeOrigemForm", "tipoNumeroOrigem", "planoNumeracaoOrigem", "numeroOrigem", "numeroDestino", "tipoDeDestino", "hostDeDestinoForm", "operadoraDeDestino", "resultadoDoEnvio", "indicadorDeRetentativa", "nomeArquivo"];
-  } else if (formData.tipoDado === "cdrs_chamadas") {
+  } 
+  else if (formData.tipoDado === "cdrs_chamadas") {
     colunasExibidas = formData.tabela === "simples"
       ? ["dataChamada", "numeroOrigem", "numeroDestino"]
       : ["id", "dataChamada", "dataImportacao", "duracaoChamada", "duracaoSegundos", "numeroOrigem", "numeroDestino", "numeroDestinoDiscado", "statusChamada", "formatoEntrega", "numeroTratadoVss", "classificacao", "origem", "destino", "cic", "rel", "operadoraItx", "rotaChamada", "operadoraNumero", "rotaVsi", "modalidade", "sentidoChamada", "eotOrigem", "eotDestino", "nomeArquivo"];

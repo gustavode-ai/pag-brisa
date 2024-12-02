@@ -1,4 +1,4 @@
-import { combineLatestAll } from './combineLatestAll';
+import { combineLatestAll } from '../../../../src/internal/operators/combineLatestAll';
 /**
  * @deprecated Renamed to {@link combineLatestAll}. Will be removed in v8.
  */

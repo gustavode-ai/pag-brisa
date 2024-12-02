@@ -1,4 +1,4 @@
-import { AsapScheduler } from './AsapScheduler';
+import { AsapScheduler } from '../../../../src/internal/scheduler/AsapScheduler';
 /**
  *
  * Asap Scheduler
