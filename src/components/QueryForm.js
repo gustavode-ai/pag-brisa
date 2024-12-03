@@ -87,7 +87,7 @@ const QueryForm = () => {
   
     const csv = Papa.unparse(formattedData);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-    saveAs(blob, "resultado_" + dateStr + ".csv");
+    saveAs(blob, `resultado_${formData.numero}_${dateStr}.csv`);
   };
   
 
