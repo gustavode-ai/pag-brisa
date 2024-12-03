@@ -106,7 +106,7 @@ const QueryForm = () => {
   } 
   else if (formData.tipoDado === "cdrs_chamadas") {
     colunasExibidas = formData.tabela === "simples"
-      ? ["dataChamada", "numeroOrigem", "numeroDestino"]
+      ? ["dataChamada", "duracaoChamada", "numeroOrigem", "numeroDestino", "statusChamada", "rel"]
       : ["id", "dataChamada", "dataImportacao", "duracaoChamada", "duracaoSegundos", "numeroOrigem", "numeroDestino", "numeroDestinoDiscado", "statusChamada", "formatoEntrega", "numeroTratadoVss", "classificacao", "origem", "destino", "cic", "rel", "operadoraItx", "rotaChamada", "operadoraNumero", "rotaVsi", "modalidade", "sentidoChamada", "eotOrigem", "eotDestino", "nomeArquivo"];
   }
 
