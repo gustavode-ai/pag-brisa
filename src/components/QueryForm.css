@@ -116,4 +116,8 @@ form {
   #d{
     height:800px;overflow:auto;
   }
-  
+ 
+  .tabela{
+    max-width: 100%;
+    overflow: scroll
+  }

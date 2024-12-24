@@ -23,7 +23,6 @@ app.post("/query", (req, res) => {
   const tabela = tipoDado === "cdrs_sms" ? "cdrs_sms" : "cdrs_chamadas";
   const campoNumero = tipoNumero === "numeroOrigem" ? "numeroOrigem" : "numeroDestino";
 
-  // Ajusta a consulta de acordo com o tipo de dado
   let query = "";
   if (tabela === "cdrs_sms") {
     query = `

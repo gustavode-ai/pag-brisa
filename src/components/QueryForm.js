@@ -52,7 +52,7 @@ const QueryForm = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://127.0.0.1:3000/query", formData);
+      const response = await axios.post("http://172.23.104.50:4004/query", formData);
       if (response.data.success) {
         setResult(response.data.data);
       } else {
