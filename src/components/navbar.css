@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(to right, rgb(255, 119, 0), rgba(255, 68, 0, 0.932));
+  padding: 10px 20px;
+  color: white;
+  flex-wrap: nowrap;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #ff5100;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-style: italic;
+  cursor: pointer;
+  position: relative;
+  margin-left: 10px;
+  margin-right: 30px;
+}
+
+/* Menu dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #fff;
+  color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  color: #ff5100;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+}
+
+.dropdown-menu button:hover {
+  background-color: #fa5c00;
+  color: white;
+}
+
+.ico {
+  width: 50px;
+  height: 50px;
+  filter: brightness(110%);
+  transition: filter 0.3s ease;
+  margin-right: 10px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.navbar-container.visible {
+  max-height: 300px; 
+}
+
+.navbar-brand a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navbar-toggle { 
+  position: absolute; 
+  top: 95px; 
+  right: 50%; 
+  z-index: 10; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  width: 25px;
+  height: 15px;
+  
+}
+.navbar-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  position: relative;
+}
+
+.navbar-container.visible {
+  max-height: 500px; /* Ajuste para a altura máxima esperada */
+  transform: translateY(0);
+  transition: max-height 1.0s ease; 
+}
+
+.navbar-toggle .toggle-icon {
+  transition: transform 0.9s ease; 
+  font-size: 24px; 
+  color: rgb(255, 255, 255);
+  transition: max-height 1.0s ease;
+  filter: drop-shadow(0px 1px 1px rgb(0 0 0 / 1.0));
+}
+.navbar-toggle .toggle-icon.rotated {
+  transform: rotate(180deg); 
+  transition: transform 0.3s ease
+
+}
+.navbar-toggle.moved {
+  top: 0px; 
+  transition: max-height 1.9s ease;
+}
+
+
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .ico {
+    width: 40px;
+    height: 40px;
+  }
+}

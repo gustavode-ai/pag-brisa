@@ -1,0 +1,124 @@
+.sub-navbar {
+  background-image: linear-gradient(to right, rgba(255, 68, 0, 0.932) , rgb(255, 119, 0));
+  padding: 5px 5px;
+  margin: 0; 
+  width: 100%; 
+  flex-direction: row;
+  box-shadow: 0px 8px 7px #ccc;
+}
+
+.sub-navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px; 
+  justify-content: center;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+
+.sub-navbar-links li {
+  margin: 0;
+  padding: 0;
+}
+.sub-navbar-links li a {
+  color: #ff5100;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+  border: none; 
+  outline: none; 
+  background: transparent; 
+  padding: 5px 10px; 
+  display: inline-block; 
+  border: none !important; 
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.sub-navbar-links li a:hover {
+  color: #ff7f50;
+  transform: scale(1.1);
+}
+
+.sub-navbar-links li.active a {
+  text-decoration: underline;
+  font-weight: bold;
+}
+.navbar-links {
+  list-style: none;
+  display: flex; /* Garantir que os links fiquem lado a lado */
+  justify-content: center; /* Centraliza os links horizontalmente */
+  gap: 20px; /* Espaçamento entre os links */
+  margin: 0 auto; /* Centraliza o contêiner em relação ao pai */
+  padding: 0;
+  position: relative; /* Mantém o posicionamento relativo */
+}
+
+.navbar-links li {
+  margin: 0;
+  padding: 0; 
+  border: none; 
+}
+
+.navbar-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  border: none; 
+  outline: none; 
+}
+
+.navbar-links li a:hover {
+  text-decoration: underline;
+  color: #000000; 
+  transform: scale(1.05); 
+}
+
+/* Responsivo para telas de 400px */
+@media (max-width: 400px) {
+  .sub-navbar-links {
+    flex-direction: column; /* Coloca os links em coluna */
+    gap: 10px; /* Reduz o espaçamento entre os links */
+  }
+
+  .sub-navbar-links li a {
+    font-size: 1rem; /* Ajusta o tamanho da fonte */
+    padding: 10px; /* Aumenta o padding para facilitar o clique */
+  }
+
+  .navbar-links {
+    flex-direction: row; /* Coloca os links em coluna */
+    gap: 10px; /* Reduz o espaçamento entre os links */
+  }
+
+  .navbar-links li a {
+    font-size: 1rem; /* Ajusta o tamanho da fonte */
+    padding: 10px; /* Aumenta o padding para facilitar o clique */
+  }
+}
+
+/* Responsivo para telas de 768px */
+@media (max-width: 768px) {
+  .sub-navbar-links {
+    flex-direction: row; /* Mantém os links em linha */
+    gap: 15px; /* Ajusta o espaçamento entre os links */
+  }
+
+  .sub-navbar-links li a {
+    font-size: 1.1rem; /* Ajusta o tamanho da fonte */
+    padding: 8px 15px; /* Aumenta o padding para garantir boa usabilidade */
+  }
+
+  .navbar-links {
+    flex-direction: row; /* Mantém os links em linha */
+    gap: 15px; /* Ajusta o espaçamento entre os links */
+  }
+
+  .navbar-links li a {
+    font-size: 1rem; /* Ajusta o tamanho da fonte */
+    padding: 8px 15px; /* Ajusta o padding */
+  }
+}

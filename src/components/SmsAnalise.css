@@ -1,0 +1,154 @@
+/* Define uma classe de escopo exclusiva para o componente */
+.sms-analise-container {
+  margin: 20px auto;
+  max-width: 1500px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estiliza o título */
+.sms-analise-container h1 {
+  text-align: center;
+  color: #000000;
+  font-family: "Arial", sans-serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+.sms-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.sms-form input,
+.sms-form select {
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ff5100;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.1s ease;
+}
+
+.sms-form input:focus {
+  border: none;
+}
+
+.sms-form button {
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #ff5100;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sms-form button:hover {
+  background-color: #e64a00;
+
+}
+
+/* Checkbox group */
+.checkbox-group {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 10px 0;
+}
+
+.checkbox-group label {
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+}
+
+.checkbox-group input[type="checkbox"] {
+  accent-color: #ff5100;
+}
+
+/* Tabela */
+.sms-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sms-table th,
+.sms-table td {
+  padding: 5px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+}
+
+.sms-table td {
+  padding: 0px;
+}
+
+.sms-table th {
+  background-color: #ff5100;
+  color: #fff;
+  font-weight: bold;
+}
+
+.sms-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.sms-table td button {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sms-table td button:first-child {
+  background-color: none;
+  margin-right: 7px;
+}
+
+.exc {
+  background-color: red;
+  margin-right: 20px;
+}
+
+.sms-table td button:last-child {
+  background-color: none;
+}
+
+.sms-table td button:hover {
+  opacity: 0.9;
+}
+
+/* Personalização de select */
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+select:focus {
+  border-color: #ffcc00;
+}
+
+select option {
+  background-color: #fff;
+  color: #333;
+}

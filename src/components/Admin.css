@@ -1,0 +1,172 @@
+/* Geral */
+.admin-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+  
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Formulários */
+.tes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 2px solid #ff5100;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tes input,
+.tes select {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tes input:focus,
+.tes select:focus {
+  border-color: #ff7700;
+  box-shadow: 0 0 8px rgba(255, 119, 0, 0.3);
+}
+
+/* Button and Table */
+.tes button {
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff7700, #ff4700);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.tes button:hover {
+  background: linear-gradient(135deg, #ff4700, #ff7700);
+  transform: scale(1.03);
+}
+
+.tes button:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 119, 0, 0.5);
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 8px 8px;
+  text-align: center;
+  border: 3px solid #ffffff;
+}
+
+th {
+  background-color: #ff7700;
+  color: white;
+  font-size: 16px;
+}
+
+/* Buttons on table rows */
+td .buton-table {
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #d04200, #e00606);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+td .buton-table:hover {
+  background: linear-gradient(135deg, #ff4700, #ff7700);
+  color: #fff;
+}
+
+td .buton-table:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 51, 0, 0.5);
+}
+
+.buton-table:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: #888;
+}
+
+/* Icon Styles */
+#icon-orange {
+  color: rgb(255, 102, 0);
+  font-size: 18px; /* You can adjust the size if needed */
+  cursor: pointer;
+  transition: color 0.3s ease;
+  width: 50px;
+}
+
+#icon-orange:hover {
+  color: rgb(255, 102, 0); /* Darker shade of orange on hover */
+}
+
+/* Mensagens de erro */
+.error-message {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  table th,
+  table td {
+    padding: 6px 10px;
+  }
+
+  h1,
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tes input,
+  .tes select,
+  .tes button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  table th,
+  table td {
+    padding: 5px 8px;
+  }
+
+  button {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}

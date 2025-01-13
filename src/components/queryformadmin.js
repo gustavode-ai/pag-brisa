@@ -3,18 +3,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import "./QueryForm.css";
-import Papa from "papaparse";
-import { format } from "date-fns";
 import { GiBroom } from "react-icons/gi";
 import { BsDownload } from "react-icons/bs";
 import { RiSearch2Line } from "react-icons/ri";
-import { LuAsterisk } from "react-icons/lu";
+import Papa from "papaparse";
+import { format } from "date-fns";
 
-const Queryform = () => {
+const Queryformadmin = () => {
   const [formData, setFormData] = useState({
-    tipoDado: "cdrs_sms",
-    tipoNumero: "numeroOrigem",
-    numero: "",
+    tipoDado: "cdrs_sms", tipoNumero: "numeroOrigem", numero: "",
     dataInicio: "",
     dataFim: "",
     tabela: "simples",
@@ -36,7 +33,11 @@ const Queryform = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "numero" && formData.tipoDado === "cdrs_sms" && !value.startsWith("55")) {
+    if (
+      name === "numero" &&
+      formData.tipoDado === "cdrs_sms" &&
+      !value.startsWith("55")
+    ) {
       setFormData({ ...formData, [name]: `55${value}` });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -51,7 +52,7 @@ const Queryform = () => {
     }
 
     if (tipoDado === "cdrs_sms" && numero.length !== 13) {
-      return "O número para SMS deve conter exatamente 11 caracteres.";
+      return "O número para SMS deve conter exatamente 13 caracteres.";
     }
 
     if (tipoDado === "cdrs_chamadas" && numero.length !== 11) {
@@ -63,7 +64,6 @@ const Queryform = () => {
     }
 
     return null;
-
   };
 
   const handleSubmit = async (e) => {
@@ -218,10 +218,6 @@ const Queryform = () => {
       });
       return filteredRow;
     })
-      .sort((a, b) => {
-        const firstColumn = colunasExibidas[0];
-        return a[firstColumn].localeCompare(b[firstColumn]);
-      })
     : [];
 
   const dataColumns = [
@@ -234,14 +230,14 @@ const Queryform = () => {
   ];
 
   return (
-    <div >
+    <div>
       <br></br>
       <br></br>
 
       <form className="form-form" onSubmit={handleSubmit}>
         <h1>Buscar CDR</h1>
         <label>
-          Tipo de Dados: <LuAsterisk color="red" />
+          Tipo de Dados:
           <select
             name="tipoDado"
             value={formData.tipoDado}
@@ -258,7 +254,7 @@ const Queryform = () => {
         </label>
         <div>
           <label>
-            Pesquisar por: <LuAsterisk color="red" />
+            Pesquisar por:
             <select
               name="tipoNumero"
               value={formData.tipoNumero}
@@ -275,7 +271,7 @@ const Queryform = () => {
           </label>
         </div>
         <label>
-          Número do Cliente: <LuAsterisk color="red" />
+          Número do Cliente:
           <input
             type="text"
             name="numero"
@@ -287,8 +283,8 @@ const Queryform = () => {
           />
         </label>
 
-        <label >
-          Data de Início: <LuAsterisk color="red" />
+        <label>
+          Data de Início:
           <input
             type="datetime-local"
             name="dataInicio"
@@ -298,8 +294,8 @@ const Queryform = () => {
             required
           />
         </label>
-        <label >
-          Data de Fim: <LuAsterisk color="red" />
+        <label>
+          Data de Fim:
           <input
             type="datetime-local"
             name="dataFim"
@@ -338,7 +334,7 @@ const Queryform = () => {
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div className="buttons-container">
           <button className="b" type="submit" id="buscar" disabled={loading}>
-            <RiSearch2Line style={{ marginRight: "8px", fontSize: "1.2rem" }} />  {loading ? "Buscando..." : "Buscar"}
+          <RiSearch2Line style={{ marginRight: "8px", fontSize: "1.2rem" }} />  {loading ? "Buscando..." : "Buscar"}
           </button>
 
           <button
@@ -348,13 +344,13 @@ const Queryform = () => {
             onClick={() => exportToCSV(filteredResult)}
             disabled={!filteredResult.length}
           >
-            <BsDownload style={{ marginRight: "8px", fontSize: "1.2rem" }}/>  Baixar CSV
+            <BsDownload style={{ marginRight: "8px", fontSize: "1.2rem" }}/>   Baixar CSV
           </button>
           <button className="b" id="apagar" type="button" onClick={handleClear}>
-           <GiBroom  style={{ marginRight: "8px", fontSize: "1.2rem" }} /> Limpar
+          <GiBroom  style={{ marginRight: "8px", fontSize: "1.2rem" }} />    Limpar
           </button>
         </div>
-      </form><br></br>
+      </form>
 
       {filteredResult && filteredResult.length > 0 ? (
         <div>
@@ -394,4 +390,4 @@ const Queryform = () => {
   );
 };
 
-export default Queryform;
+export default Queryformadmin;

@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+  /* Inclui padding e borda na largura total */
+}
+
+.containero {
+  width: 100%;
+  /* Ajusta para 100% da largura disponível */
+  max-width: 450px;
+  /* Define uma largura máxima */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  /* A 50% da altura do container */
+  left: 50%;
+  /* A 50% da largura do container */
+  transform: translate(-50%, -50%);
+
+}
+
+.containero h1 {
+  text-align: center;
+  font-size: 30px;
+  color: #ffff;
+}
+
+.containero .input-field {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 20px 0;
+  /* Ajusta a margem para evitar overflow */
+}
+
+.input-field input:focus {
+  outline: none;
+  border-color: #ffffff;
+  /* Destaca a borda ao focar */
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.47);
+  /* Efeito de foco */
+}
+
+.input-field input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 25px;
+}
+
+.input-field input::placeholder {
+  color: #ffffff;
+}
+
+.input-field .icon {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #fff;
+}
+
+.containero .recall-forget {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: 10px 0;
+  /* Ajusta a margem para evitar overflow */
+}
+
+.recall-forget label input {
+  accent-color: #fff;
+  margin-right: 4px;
+}
+
+.recall-forget a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.recall-forget a:hover {
+  text-decoration: underline;
+}
+
+.containero button {
+  width: 100%;
+  height: 45px;
+  background: #ffffff;
+  border: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #000000;
+  font-weight: 700;
+  text-shadow: none;
+  transition: all 0.3s ease;
+  /* Adiciona transição */
+}
+
+.containero button:hover {
+  background-color: rgb(237, 111, 33);
+  color: #fff;
+}
