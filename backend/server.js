@@ -11,12 +11,17 @@ const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
+
 // Endpoint inicial
 app.get("/", (req, res) => {
-  res.send("Servidor funcionando! Use os endpoints /login, /usuarios, /criar-usuario, /usuarios/:id e /usuarios/:id/senha.");
+  res.send("Servidor funcionando!");
 });
 
 // Endpoint para login
+const jwt = require("jsonwebtoken");
+ 
+const SECRET_KEY = "chaveteste"; 
+
 app.post("/login", async (req, res) => {
   const { nome, senha } = req.body;
 
@@ -31,21 +36,26 @@ app.post("/login", async (req, res) => {
       return res.status(500).json({ success: false, error: "Erro interno no servidor." });
     }
 
-   
     if (results.length === 0) {
       return res.status(401).json({ success: false, error: "Credenciais inválidas." });
     }
 
     const user = results[0];
 
-    
     const isPasswordCorrect = await bcrypt.compare(senha, user.senha);
 
     if (isPasswordCorrect) {
-    
+      // Gerar o token JWT
+      const token = jwt.sign(
+        { id: user.id, nome: user.nome, role: user.role },
+        SECRET_KEY,
+        { expiresIn: "1m" } 
+      );
+
       res.json({ 
         success: true, 
         message: "Login bem-sucedido!", 
+        token, // Retorna o token ao cliente
         nome: user.nome,    
         role: user.role     
       });
@@ -54,6 +64,7 @@ app.post("/login", async (req, res) => {
     }
   });
 });
+
 
 
 // Endpoint para consultas
@@ -188,10 +199,10 @@ app.post('/add-sms-bulk', (req, res) => {
         return res.status(500).json({ success: false, error: "Erro ao salvar no banco de dados." });
       }
 
-      // Adicionar registro inserido ao array
+      
       insertedRecords.push({ id: result.insertId, aplicativo, brocker, numerosFunciona: funcionaEm });
 
-      // Verificar se todos os registros foram inseridos
+      
       if (insertedRecords.length === records.length) {
         res.json({
           success: true,
@@ -209,14 +220,14 @@ app.put("/usuarios/:id", async (req, res) => {
   const { id } = req.params;
   const { senha, role } = req.body;
 
-  // Verificar se pelo menos uma alteração foi feita
+  
   if (!senha && !role) {
     return res.status(400).json({ success: false, error: "A senha ou o role precisam ser fornecidos." });
   }
 
   let hashedSenha;
 
-  // Se a senha foi fornecida, faz o hash
+
   if (senha) {
     try {
       hashedSenha = await bcrypt.hash(senha, 10);
@@ -226,7 +237,7 @@ app.put("/usuarios/:id", async (req, res) => {
     }
   }
 
-  // Montar a query para atualização do usuário
+  
   let query = "UPDATE usuarios SET ";
   const params = [];
 

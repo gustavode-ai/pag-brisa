@@ -95,7 +95,7 @@ input[type="radio"]:focus + label {
 /* Hover nos radio buttons */
 input[type="radio"]:hover + label {
   background-color: #ff5100;
-  border-color: #ff5100;
+  border-color: #e86c33;
   color: white;
 }
 

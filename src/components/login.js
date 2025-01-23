@@ -31,8 +31,8 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          nome: username, // Envia o nome de usuário
-          senha: password, // Envia a senha
+          nome: username, 
+          senha: password, 
         }),
       });
 
@@ -42,9 +42,10 @@ const Login = () => {
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userRole", data.role);
         localStorage.setItem("userName", data.nome);
+        localStorage.setItem("token", data.token); 
 
         if (data.role === "admin") {
-          navigate("/admin-dashboard");
+          navigate("/queryformadmin");
         } else {
           navigate("/QueryForm");
         }

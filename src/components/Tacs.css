@@ -23,15 +23,32 @@
     border-radius: 25px;
     font-size: 16px;
   }
-  
+  .search-container input:focus {
+    outline: none;
+    border-color: #ff6600;
+    box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+}
   .search-icon {
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: #aaa;
-    font-size: 18px;
-  }
+    color: #555; 
+    font-size: 20px; 
+    cursor: pointer;
+    transition: color 0.3s ease; 
+}
+.tac-table tr:nth-child(odd) {
+  background-color: #dde5e5;
+}
+
+.tac-table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.search-icon:hover, .search-icon:focus {
+    color: #ff6600; /* Cor de destaque */
+}
   
   /* Estilos da tabela */
   .tac-tabela {
@@ -53,7 +70,7 @@
   .tac-table td {
     padding: 5px;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid #ffffffa3;
   }
   
   .tac-table th {
@@ -64,9 +81,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
   }
-  
-  
-  
   

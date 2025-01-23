@@ -76,7 +76,7 @@ table {
 
 th,
 td {
-  padding: 8px 8px;
+  padding: 3px 3px;
   text-align: center;
   border: 3px solid #ffffff;
 }
@@ -85,33 +85,6 @@ th {
   background-color: #ff7700;
   color: white;
   font-size: 16px;
-}
-
-/* Buttons on table rows */
-td .buton-table {
-  font-size: 14px;
-  border: none;
-  border-radius: 6px;
-  background: linear-gradient(135deg, #d04200, #e00606);
-  color: #ffffff;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-td .buton-table:hover {
-  background: linear-gradient(135deg, #ff4700, #ff7700);
-  color: #fff;
-}
-
-td .buton-table:focus {
-  outline: none;
-  box-shadow: 0 0 8px rgba(255, 51, 0, 0.5);
-}
-
-.buton-table:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  color: #888;
 }
 
 /* Icon Styles */

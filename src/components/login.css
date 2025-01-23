@@ -4,28 +4,23 @@
 }
 
 .containero {
-  width: 100%;
-  /* Ajusta para 100% da largura disponível */
+  width: 90%;
   max-width: 450px;
-  /* Define uma largura máxima */
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(5px);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   padding: 40px;
   position: absolute;
   top: 50%;
-  /* A 50% da altura do container */
-  left: 50%;
-  /* A 50% da largura do container */
+  left: 70%;
   transform: translate(-50%, -50%);
-
 }
 
 .containero h1 {
   text-align: center;
   font-size: 30px;
-  color: #ffff;
+  color: #fd5800;
 }
 
 .containero .input-field {
@@ -38,26 +33,24 @@
 
 .input-field input:focus {
   outline: none;
-  border-color: #ffffff;
-  /* Destaca a borda ao focar */
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.47);
-  /* Efeito de foco */
+  border-color: #353333;
+  box-shadow: 0 0 0 4px rgba(57, 51, 51, 0.47);
 }
 
 .input-field input {
   width: 100%;
   height: 100%;
-  background: transparent;
+  background: transparent; 
   outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 40px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
   font-size: 16px;
-  color: #fff;
+  color: #000000;
   padding: 20px 45px 20px 25px;
 }
 
 .input-field input::placeholder {
-  color: #ffffff;
+  color: #000000;
 }
 
 .input-field .icon {
@@ -66,7 +59,7 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 16px;
-  color: #fff;
+  color: #f45804bb;
 }
 
 .containero .recall-forget {
@@ -74,11 +67,10 @@
   justify-content: space-between;
   font-size: 14.5px;
   margin: 10px 0;
-  /* Ajusta a margem para evitar overflow */
 }
 
 .recall-forget label input {
-  accent-color: #fff;
+  accent-color: #000000;
   margin-right: 4px;
 }
 
@@ -94,9 +86,9 @@
 .containero button {
   width: 100%;
   height: 45px;
-  background: #ffffff;
+  background: #f85b00db;
   border: none;
-  border-radius: 40px;
+  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-size: 16px;
@@ -110,4 +102,61 @@
 .containero button:hover {
   background-color: rgb(237, 111, 33);
   color: #fff;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .containero {
+    padding: 30px;
+    width: 85%;
+  }
+
+  .containero h1 {
+    font-size: 24px;
+  }
+
+  .input-field input {
+    font-size: 14px;
+    padding: 15px 40px 15px 20px;
+  }
+
+  .input-field .icon {
+    font-size: 14px;
+  }
+
+  .recall-forget {
+    font-size: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .containero button {
+    height: 40px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .containero {
+    padding: 20px;
+  }
+
+  .containero h1 {
+    font-size: 20px;
+  }
+
+  .input-field input {
+    font-size: 12px;
+    padding: 10px 35px 10px 15px;
+  }
+
+  .recall-forget {
+    font-size: 10px;
+  }
+
+  .containero button {
+    height: 35px;
+    font-size: 12px;
+  }
 }

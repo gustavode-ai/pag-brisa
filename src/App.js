@@ -32,13 +32,13 @@ const App = () => {
 
         {/* Painel de administração */}
         <Route
-          path="/admin-dashboard"
+          path="/queryformadmin"
           element={
             <AdminRoute
               element={
                 <>
                   <NavAdmin />
-                  <AdminDashboard />
+                  <Queryformadmin />
                 </>
               }
             />
@@ -158,20 +158,18 @@ const App = () => {
 
         {/* Query Form Admin */}
         <Route
-          path="/queryformadmin"
+          path="/admin-dashboard"
           element={
             <PrivateRoute
               element={
                 <>
                   <NavAdmin />
-                  <Queryformadmin />
+                  <AdminDashboard />
                 </>
               }
             />
           }
         />
-
-        {/* SMS Análise Admin */}
         <Route
           path="/SmsAnaliseadmin"
           element={

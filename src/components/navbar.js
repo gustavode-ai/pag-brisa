@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SubNavbar from "./SubNavbar";
 import "./navbar.css";
 import { MdKeyboardDoubleArrowDown } from "react-icons/md";
-import brisa from "./favicon-brisanet.ico";
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -35,8 +35,8 @@ const Navbar = () => {
       <div className={`navbar-container ${isNavbarVisible ? "visible" : ""}`}>
         <nav className="navbar">
           <div className="navbar-brand">
-            <img src={brisa} alt="icon" className="ico" />
-            <a href="/QueryForm">Consulta de CDR</a>
+            <img src={`${process.env.PUBLIC_URL}/Logo.svg`} alt="icon" className="ico" />
+            <a href="/QueryForm">NetCore</a>
           </div>
 
           <div className="avatar" onClick={toggleDropdown}>

@@ -3,25 +3,34 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "font-awesome/css/font-awesome.min.css";
-import { IconButton, Tooltip, Dialog, DialogContent, DialogTitle, Button as MuiButton, TextField, CircularProgress } from "@mui/material";
+import {
+  IconButton,
+  Tooltip,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Button as MuiButton,
+  TextField,
+  CircularProgress,
+} from "@mui/material";
 import "./Admin.css";
-import DeleteIcon from '@mui/icons-material/Delete'; 
-import EditIcon from '@mui/icons-material/Edit'; 
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import styled from "styled-components";
 
-// Styling components
+// Estilizando o formulário com styled-components
 const FormContainer = styled.form`
   display: flex;
-  flex-direction: row; 
-  align-items: center; 
-  justify-content: center; 
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   gap: 20px;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0px 0px 5px #ccc;
   border-radius: 5px;
-  width: 1000px; 
-  margin: 0 auto; 
+  width: 1000px;
+  margin: 0 auto;
   border: 1px solid #ccc;
 `;
 
@@ -53,7 +62,7 @@ const Label = styled.label`
 `;
 
 const StyledButton = styled.button`
-  padding: 10px;
+  padding: 1px;
   cursor: pointer;
   border-radius: 5px;
   border: none;
@@ -66,22 +75,22 @@ const StyledButton = styled.button`
 `;
 
 const AdminDashboard = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]); // Estado para armazenar a lista de usuários
   const [newUser, setNewUser] = useState({
     nome: "",
     email: "",
     senha: "",
     role: "user",
-  });
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [newPassword, setNewPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [showPasswordForm, setShowPasswordForm] = useState(false);
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [newRole, setNewRole] = useState("");
+  }); // Estado para armazenar os dados do novo usuário
+  const [selectedUser, setSelectedUser] = useState(null); // Estado para armazenar o usuário selecionado para edição ou exclusão
+  const [newPassword, setNewPassword] = useState(""); // Estado para armazenar a nova senha
+  const [error, setError] = useState(""); // Estado para erros
+  const [loading, setLoading] = useState(false); // Estado para controle de loading
+  const [showPasswordForm, setShowPasswordForm] = useState(false); // Estado para exibir ou ocultar o formulário de edição de senha
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false); // Estado para controle do diálogo de exclusão
+  const [newRole, setNewRole] = useState(""); // Estado para armazenar o novo cargo
 
-
+  // Efeito colateral para carregar os usuários ao carregar o componente
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -89,9 +98,9 @@ const AdminDashboard = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/usuarios");
+      const response = await axios.get("http://localhost:3000/usuarios"); // Fazendo a requisição para buscar os usuários
       if (Array.isArray(response.data.data)) {
-        setUsers(response.data.data);
+        setUsers(response.data.data); // Atualiza o estado com os usuários recebidos
       } else {
         throw new Error("Resposta inesperada da API");
       }
@@ -102,100 +111,115 @@ const AdminDashboard = () => {
         position: "bottom-left",
       });
     } finally {
-      setLoading(false);
+      setLoading(false); // Finaliza o carregamento
     }
   };
 
-  // Validate password function (at least 6 characters, includes numbers and special characters)
+  // Função para validar a senha
   const isPasswordValid = (password) => {
     const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/;
     return regex.test(password);
   };
 
-  // Validate email function (simple regex for valid email format)
+  // Função para validar o e-mail
   const isEmailValid = (email) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
   };
 
-  // Validate if the username already exists
+  // Função para verificar se o nome do usuário é único
   const isNameUnique = (name) => {
-    return !users.some((user) => user.nome.toLowerCase() === name.toLowerCase());
+    return !users.some(
+      (user) => user.nome.toLowerCase() === name.toLowerCase()
+    );
   };
 
+  // Função para criar um novo usuário
   const handleCreateUser = async (e) => {
     e.preventDefault();
 
-    // Validate the password
+    // Validação da senha
     if (!isPasswordValid(newUser.senha)) {
-      toast.error("A senha deve ter pelo menos 6 caracteres, incluir números e caracteres especiais.", {
-        autoClose: 2000,
-        position: "bottom-left",
-      });
+      toast.error(
+        "A senha deve ter pelo menos 6 caracteres, incluir números e caracteres especiais.",
+        {
+          autoClose: 2000,
+          position: "bottom-left",
+        }
+      );
       return;
     }
 
-    // Validate the email
+    // Validação do e-mail
     if (!isEmailValid(newUser.email)) {
-      toast.error("O e-mail fornecido é inválido. Por favor, insira um e-mail válido.", {
-        autoClose: 2000,
-        position: "bottom-left",
-      });
+      toast.error(
+        "O e-mail fornecido é inválido. Por favor, insira um e-mail válido.",
+        {
+          autoClose: 2000,
+          position: "bottom-left",
+        }
+      );
       return;
     }
 
-    // Validate if the name is unique
+    // Validação do nome
     if (!isNameUnique(newUser.nome)) {
-      toast.error("Já existe um usuário com este nome. Por favor, escolha outro nome.", {
-        autoClose: 2000,
-        position: "bottom-left",
-      });
+      toast.error(
+        "Já existe um usuário com este nome. Por favor, escolha outro nome.",
+        {
+          autoClose: 2000,
+          position: "bottom-left",
+        }
+      );
       return;
     }
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:3000/criar-usuario", newUser);
+      await axios.post("http://localhost:3000/criar-usuario", newUser); // Cria o usuário via API
       toast.success("Usuário criado com sucesso!", {
         autoClose: 2000,
         position: "bottom-left",
       });
-      fetchUsers();
-      setNewUser({ nome: "", email: "", senha: "", role: "user" });
+      fetchUsers(); // Recarrega a lista de usuários
+      setNewUser({ nome: "", email: "", senha: "", role: "user" }); // Limpa os campos do formulário
     } catch (error) {
       toast.error("Erro ao criar usuário.", {
         autoClose: 2000,
         position: "bottom-left",
       });
     } finally {
-      setLoading(false);
+      setLoading(false); // Finaliza o carregamento
     }
   };
 
+  // Função para excluir o usuário
   const handleDeleteUser = async () => {
     try {
       setLoading(true);
-      await axios.delete(`http://localhost:3000/usuarios/${selectedUser.id}`);
+      await axios.delete(`http://localhost:3000/usuarios/${selectedUser.id}`); // Exclui o usuário via API
       toast.success("Usuário deletado com sucesso!", {
         autoClose: 2000,
         position: "bottom-left",
       });
-      fetchUsers();
-      setShowDeleteDialog(false);
+      fetchUsers(); // Recarrega a lista de usuários
+      setShowDeleteDialog(false); // Fecha o diálogo de exclusão
     } catch (error) {
       toast.error("Erro ao deletar usuário.", {
         autoClose: 2000,
         position: "bottom-left",
       });
     } finally {
-      setLoading(false);
+      setLoading(false); // Finaliza o carregamento
     }
   };
 
+  // Função para cancelar a exclusão do usuário
   const handleCancelDelete = () => {
-    setShowDeleteDialog(false);
+    setShowDeleteDialog(false); // Fecha o diálogo de exclusão
   };
 
+  // Função para atualizar o usuário
   const handleUpdateUser = async () => {
     // Validação da senha
     if (newPassword && !isPasswordValid(newPassword)) {
@@ -208,10 +232,10 @@ const AdminDashboard = () => {
       );
       return;
     }
-  
+
     try {
       setLoading(true);
-      // Atualizar senha e role
+      // Atualiza o usuário via API
       await axios.put(`http://localhost:3000/usuarios/${selectedUser.id}`, {
         senha: newPassword,
         role: newRole || selectedUser.role,
@@ -220,31 +244,31 @@ const AdminDashboard = () => {
         autoClose: 2000,
         position: "bottom-left",
       });
-      setShowPasswordForm(false);
-      fetchUsers(); // Recarregar a lista de usuários
+      setShowPasswordForm(false); // Fecha o formulário de edição
+      fetchUsers(); // Recarrega a lista de usuários
     } catch (error) {
       toast.error("Erro ao atualizar usuário.", {
         autoClose: 2000,
         position: "bottom-left",
       });
     } finally {
-      setLoading(false);
-      setNewPassword("");
-      setNewRole("");
+      setLoading(false); // Finaliza o carregamento
+      setNewPassword(""); // Limpa o campo de senha
+      setNewRole(""); // Limpa o campo de role
     }
   };
-  
+
+  // Função para editar o usuário
   const handleEditUser = (user) => {
-    setSelectedUser(user);
-    setNewPassword("");
-    setNewRole(user.role);
-    setShowPasswordForm(true);
+    setSelectedUser(user); // Define o usuário selecionado
+    setNewPassword(""); // Limpa o campo de senha
+    setNewRole(user.role); // Define o role do usuário
+    setShowPasswordForm(true); // Exibe o formulário de edição
   };
-  
-  
 
   return (
     <div className="admin-dashboard">
+      {/* Formulário para cadastro de usuário */}
       <h1>Cadastrar Usuário</h1>
       <FormContainer onSubmit={handleCreateUser}>
         <InputArea>
@@ -296,9 +320,7 @@ const AdminDashboard = () => {
         </StyledButton>
       </FormContainer>
 
-      <br />
-
-      <br />
+      {/* Tabela de usuários cadastrados */}
       <section>
         <h2>Usuários Cadastrados</h2>
         {users.length > 0 ? (
@@ -318,13 +340,15 @@ const AdminDashboard = () => {
                   <td>{user.email}</td>
                   <td>{user.role}</td>
                   <td>
-
-                    {/* Botão de Edição */}
-                  <Tooltip title="Editar Usuário">
-                    <IconButton onClick={() => handleEditUser(user)} disabled={loading}>
-                      <EditIcon color="primary" />
-                    </IconButton>
-                  </Tooltip>
+                    {/* Botões de Edição e Exclusão */}
+                    <Tooltip title="Editar Usuário">
+                      <IconButton
+                        onClick={() => handleEditUser(user)}
+                        disabled={loading}
+                      >
+                        <EditIcon color="primary" />
+                      </IconButton>
+                    </Tooltip>
 
                     <Tooltip title="Excluir">
                       <IconButton
@@ -337,7 +361,6 @@ const AdminDashboard = () => {
                         <DeleteIcon style={{ color: "rgb(255, 0, 0)" }} />
                       </IconButton>
                     </Tooltip>
-                    
                   </td>
                 </tr>
               ))}
@@ -348,85 +371,89 @@ const AdminDashboard = () => {
         )}
       </section>
 
-      {/* Dialog de Alteração de Senha */}
+      {/* Diálogos de Edição de Senha e Exclusão */}
       {showPasswordForm && selectedUser && (
-  <Dialog open={showPasswordForm} onClose={() => setShowPasswordForm(false)}>
-    <DialogTitle>Editar Usuário</DialogTitle>
-    <DialogContent>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleUpdateUser(); // Nova função para atualizar senha e role
-        }}
-      >
-        <TextField
-          label="Nova Senha"
-          type="password"
-          fullWidth
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          style={{ marginBottom: 20 }}
-         
-        />
-        <TextField
-          label="Role"
-          select
-          value={newRole}
-          onChange={(e) => setNewRole(e.target.value)}
-          fullWidth
-          SelectProps={{
-            native: true,
-          }}
-          required
+        <Dialog
+          open={showPasswordForm}
+          onClose={() => setShowPasswordForm(false)}
         >
-          <option value="user">Usuário</option>
-          <option value="admin">Administrador</option>
-        </TextField>
-        <div style={{ marginTop: 20 }}>
-          <MuiButton
-            type="submit"
-            color="primary"
-            variant="contained"
-            disabled={loading}
-            style={{ background: "orange", border: "none" }}
-          >
-            {loading ? "Salvando..." : "Salvar Alterações"}
-          </MuiButton>
-          <MuiButton
-            onClick={() => setShowPasswordForm(false)}
-            style={{ marginLeft: 10 }}
-            variant="outlined"
-          >
-            Cancelar
-          </MuiButton>
-        </div>
-      </form>
-    </DialogContent>
-  </Dialog>
-)}
-
-
-      {/* Dialog de Confirmação de Exclusão */}
-      {showDeleteDialog && selectedUser && (
-        <Dialog open={showDeleteDialog} onClose={handleCancelDelete}>
-          <DialogTitle>Confirmar Exclusão</DialogTitle>
+          <DialogTitle>Editar Usuário</DialogTitle>
           <DialogContent>
-            <p style={{ marginBottom: 30 }}>Você tem certeza que deseja excluir este usuário?</p>
-            <div>
-              <MuiButton
-                onClick={handleDeleteUser}
-                color="primary"
-                variant="contained"
-                style={{ background: 'orange', border: 'none' }}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleUpdateUser();
+              }}
+            >
+              <TextField
+                label="Nova Senha"
+                type="password"
+                fullWidth
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                style={{ marginBottom: 20 }}
+              />
+              <TextField
+                label="Role"
+                select
+                value={newRole}
+                onChange={(e) => setNewRole(e.target.value)}
+                fullWidth
+                SelectProps={{ native: true }}
+                required
               >
-                Sim, excluir
-              </MuiButton>
-              <MuiButton onClick={handleCancelDelete} style={{ marginLeft: 100 }} variant="outlined">Cancelar</MuiButton>
-            </div>
+                <option value="user">Usuário</option>
+                <option value="admin">Administrador</option>
+              </TextField>
+              <div style={{ marginTop: 20 }}>
+                <MuiButton
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  disabled={loading}
+                  style={{ background: "orange" }}
+                >
+                  {loading ? "Salvando..." : "Salvar Alterações"}
+                </MuiButton>
+                <MuiButton
+                  onClick={() => setShowPasswordForm(false)}
+                  variant="outlined"
+                  style={{ marginLeft: 10 }}
+                >
+                  Cancelar
+                </MuiButton>
+              </div>
+            </form>
           </DialogContent>
         </Dialog>
       )}
 
+      {/* Diálogo de confirmação de exclusão */}
+      <Dialog open={showDeleteDialog} onClose={handleCancelDelete}>
+        <DialogTitle>Confirmar Exclusão</DialogTitle>
+        <DialogContent>
+          <p>Tem certeza que deseja excluir este usuário?</p>
+          <div style={{ marginTop: 20 }}>
+          <MuiButton
+              onClick={handleDeleteUser}
+              style={{ background: "rgb(255, 0, 0)" }}
+              variant="contained"
+            >
+              Excluir
+            </MuiButton>
+            <MuiButton
+              onClick={handleCancelDelete}
+              variant="outlined"
+              style={{ marginLeft: '100px'}}
+            >
+              Cancelar
+            </MuiButton>
+            
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Toasts de notificação */}
       <ToastContainer />
     </div>
   );

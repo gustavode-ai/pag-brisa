@@ -9,7 +9,7 @@ const Tac = () => {
   const [headers, setHeaders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 10; // Define o número de linhas por página
+  const rowsPerPage = 17; // Define o número de linhas por página
 
   const sheetId = "1T50RZ122YIqSMGvU_BgowBvNpUm93b41D6p6yyeaEAM";
   const apiKey = "AIzaSyCqNGbgh5Epo4o_BxiUTCANOH2RYLpLa24";
@@ -23,8 +23,8 @@ const Tac = () => {
         );
         const sheetData = response.data.values || [];
         if (sheetData.length > 0) {
-          setHeaders(sheetData[0]); // Define a primeira linha como cabeçalho
-          setData(sheetData.slice(1)); // Define os dados excluindo a primeira linha
+          setHeaders(sheetData[0]); 
+          setData(sheetData.slice(1)); 
         }
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
@@ -85,7 +85,7 @@ const Tac = () => {
                     <td
                       key={cellIndex}
                       style={
-                        cellIndex === row.length - 1 // Verifica se é a última célula
+                        cellIndex === row.length - 1
                           ? {
                               color:
                                 cell.toString().toLowerCase() === "cadastrado"

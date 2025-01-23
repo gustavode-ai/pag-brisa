@@ -1,38 +1,37 @@
-.App {
+/* Tema Claro */
+.light-theme {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+/* Tema Escuro */
+.dark-theme {
+  --background-color: #1e1e1e;
+  --text-color: #ffffff;
+}
+
+/* Estilos gerais */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 20px;
   text-align: center;
+  transition: background-color 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar .dropdown-menu {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar .avatar {
+  background-color: var(--text-color);
+  color: var(--background-color);
 }

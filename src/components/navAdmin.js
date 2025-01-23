@@ -24,7 +24,7 @@ const NavAdmin = () => {
 
   const toggleNavbar = () => {
     setIsNavbarVisible((prev) => !prev);
-    setIsButtonMoved((prev) => !prev); // Alterna a posição do botão
+    setIsButtonMoved((prev) => !prev); 
   };
 
   const userName = localStorage.getItem("userName") || "";
@@ -35,8 +35,8 @@ const NavAdmin = () => {
       <div className={`navbar-container ${isNavbarVisible ? "visible" : ""}`}>
         <nav className="navbar">
           <div className="navbar-brand">
-            <img src={brisa} alt="icon" className="ico" />
-            <a href="/QueryForm">Consulta de CDR</a>
+            <img src={`${process.env.PUBLIC_URL}/Logo.svg`} alt="icon" className="ico" />
+            <a href="/queryformadmin">NetCore</a>
           </div>
 
           <div className="avatar" onClick={toggleDropdown}>
